@@ -1,0 +1,94 @@
+<ion-content class="no-scroll">
+  <div class="home-page">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="sidebar" col-2>
+          <div>
+            <img class="logo-img" src="assets/images/nav-bar-icon/logo.png" alt="Beauty Shop">
+          </div>
+
+          <ion-fab middle>
+            <button ion-fab clear menuToggle>
+              <img class="menu-icons" src="assets/images/nav-bar-icon/menu.png" alt="">
+            </button>
+            <button ion-fab clear (click)="gotoSearch()">
+              <img class="menu-icons" src="assets/images/nav-bar-icon/search.png" alt="">
+            </button>
+            <button ion-fab clear (click)="gotoCart()">
+              <img class="menu-icons" src="assets/images/nav-bar-icon/shopping-bag.png" alt=""><span class="cart-span">
+                <p>{{totalQty}}</p>
+              </span>
+            </button>
+          </ion-fab>
+
+          <div class="side-menu-toggle">
+            <ion-fab bottom left edge>
+              <button ion-fab mini color="light" class="arrow-btn">
+                <img id="arrow-btn-img" src="assets/images/nav-bar-icon/arrow.png" alt="">
+              </button>
+              <ion-fab-list side="right">
+                <button ion-fab class="bottm-btn" (click)="gotoHome()">
+                  <img src="assets/images/menu-icon/home.png" alt="Home">
+                </button>
+                <button ion-fab class="bottm-btn" (click)="gotoCategory()">
+                  <img src="assets/images/menu-icon/category.png" alt="Category">
+                </button>
+                <button ion-fab class="bottm-btn" (click)="gotoProfile()">
+                  <img src="assets/images/menu-icon/profile.png" alt="Profile">
+                </button>
+                <button ion-fab class="bottm-btn" (click)="gotoNotifications()">
+                  <img src="assets/images/menu-icon/notifications.png" alt="Notifications">
+                </button>
+                <button ion-fab class="bottm-btn" (click)="gotoOffers()">
+                  <img src="assets/images/menu-icon/offer.png" alt="offer">
+                </button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </ion-col>
+
+        <!-- Right panel -->
+        <ion-col col-10>
+          <div class="outer-div">
+            <div class="main-img" style="height: 24%;">
+              <img id="skin-care-l" src="assets/images/skin-care.jpg" alt="">
+              <!-- <img id="skin-care-s" src="assets/images/small/skin-care.png" alt=""> -->
+              <h1 id="skin-care-s">SKIN CARE</h1>
+              <br>
+              <img id="skin-care-vm" src="assets/images/small/view-more-w.png" alt="">
+            </div>
+            <div class="main-img" style="height: 15%;">
+              <!-- <img id="fragrance" src="assets/images/small/fragrance.png" alt=""> -->
+              <h3 id="fragrance">FRAGRANCE</h3>
+              <br>
+              <img id="fragrance-vm" src="assets/images/small/view-more-b.png" alt="">
+            </div>
+            <div class="main-img" style="height: 26%;">
+              <img id="body-care-l" src="assets/images/body-care.jpg" alt="">
+              <!-- <img id="body-care-s" src="assets/images/small/body-care.png" alt=""> -->
+              <h1 id="body-care-s">BODY CARE</h1>
+              <br>
+              <img id="body-care-vm" src="assets/images/small/view-more-w-1.png" alt="">
+            </div>
+            <div class="main-img" style="height: 15%;">
+            </div>
+
+            <div class="main-img" style="height: 20%;">
+              <img id="hair-care-l" src="assets/images/hair-care.jpg" alt="">
+              <!-- <img id="hair-care-s" src="assets/images/small/hair-care.png" alt=""> -->
+              <h1 id="hair-care-s">HAIR CARE</h1>
+              <br>
+              <img id="hair-care-vm" src="assets/images/small/view-more.png" alt="">
+            </div>
+            <div class="inlay-1">
+              <img id="inlay-1-fragrance" src="assets/images/fragrance.jpg" alt="">
+            </div>
+            <div class="inlay-2">
+              <img id="inlay-2-offer" src="assets/images/offer.jpg" alt="">
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

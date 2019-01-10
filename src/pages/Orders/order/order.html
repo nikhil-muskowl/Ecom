@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1 text-center> {{heading_title}}</h1>
+  <ion-card *ngFor="let order of orderModel;">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            <h3 [innerHTML]="order.order_no"></h3>
+            <p>{{order.name}}</p>
+            <p *ngIf="order.status == 'Payment Failed'" style="color:red;">{{order.status}}</p>
+            <p *ngIf="order.status == 'Draft'" style="color:#FFC300;">{{order.status}}</p>
+            <p *ngIf="order.status == 'Check Out/Payment Recieved'" style="color:green;">{{order.status}}</p>
+            <p>{{order.date_added}}</p>
+            <p>{{order.total}}</p>
+          </ion-col>
+          <ion-col col-4>
+            <ion-buttons end>
+              <button ion-button color="primary" (click)="viewDetail(order)">
+                View&nbsp;<ion-icon name="ios-eye-outline"></ion-icon>
+              </button>
+              <button *ngIf="order.paymenturl" ion-button color="secondary" (click)="paymentOrder(order)">
+                Payment&nbsp;<ion-icon name="globe"></ion-icon>
+              </button>
+              <button *ngIf="order.trackurl" ion-button color="secondary" (click)="trackOrder(order)">
+                Track&nbsp;<ion-icon name="globe"></ion-icon>
+              </button>
+              <button *ngIf="order.iscancel" ion-button color="secondary" (click)="cancelOrder(order)">
+                Cancel&nbsp;<ion-icon name="globe"></ion-icon>
+              </button>
+              <button *ngIf="order.isrefund" ion-button color="secondary" (click)="refundOrder(order)">
+                Refund&nbsp;<ion-icon name="globe"></ion-icon>
+              </button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="isInfinite">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <!-- <div *ngIf="!orderModel?.length" text-center>
+      <h2>You have placed no orders!</h2>
+  </div> -->
+</ion-content>

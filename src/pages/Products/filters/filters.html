@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <ion-list>
+      <h2>{{country_origin_txt}}</h2>
+      <ion-item *ngFor="let cntryorign of country_originsModal; let i=index">
+        <ion-label>{{cntryorign.name}}</ion-label>
+        <ion-checkbox (click)="selectMember(cntryorign, i);  $event.stopPropagation();" [(ngModel)]="cntryorign.checked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div>
+    <h2>{{price_txt}}</h2>
+    <ion-range dualKnobs="true" [min]="min_price" [max]="max_price" (ionChange)="changePriceRange($event)"
+      [(ngModel)]="priceFilter" pin="true" step="1">
+      <ion-label range-left>{{min_price}}</ion-label>
+      <ion-label range-right>{{max_price}}</ion-label>
+    </ion-range>
+  </div>
+
+  <div>
+    <ion-list>
+      <h2>{{brands_txt}}</h2>
+      <ion-item *ngFor="let brand of brandsModal; let i=index">
+        <ion-label>{{brand.name}}</ion-label>
+        <ion-checkbox (click)="selectedBrands(brand, i);  $event.stopPropagation();" [(ngModel)]="brand.checked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- <button ion-button full class="btn_down_full" (click)="applyFilters()">Apply</button> -->
+</ion-content>
+
+<ion-footer>
+  <ion-row text-center>
+    <ion-col col-6>
+      <button ion-button full (click)="clearFilters()">{{clear_txt}}</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button full (click)="applyFilters()">{{apply_txt}}</button>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>

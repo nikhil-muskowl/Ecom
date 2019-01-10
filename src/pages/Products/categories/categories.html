@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item ion-item *ngFor="let items of catList; let i=index">
+      <ion-row>
+        <!-- Parent Pages -->
+        <ion-col col-9 class="menu-head">
+          <span ion-text>
+            <span (click)="openPage(items)">
+              {{items.name}}
+            </span>
+            <ion-icon (click)="ExpandChild(items, i)" [name]="selectedCat == i? 'arrow-down' : 'arrow-forward'" *ngIf="items.children.length>0"
+              float-right></ion-icon>
+          </span>
+
+          <!-- Child Pages -->
+          <ion-list class="child_list" no-lines *ngIf="items.children.length>0" [hidden]="selectedCat != i">
+            <ion-item no-border *ngFor="let child of items.children; let i2=index" text-wrap (click)="openPage(child)">
+              <ion-row>
+                <ion-col col-10><span ion-text [innerHTML]="child.name"></span></ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="addresses?.length">
+    <ion-card *ngFor="let address of addresses;">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-8>
+              <h3 [innerHTML]="address.address"></h3>
+            </ion-col>
+            <ion-col col-4>
+              <ion-buttons end>
+                <button ion-button color="secondary" icon-only (click)="edit(address)">
+                  <ion-icon name="ios-create-outline"></ion-icon>
+                </button>
+                <button ion-button color="danger" icon-only (click)="remove(address)">
+                  <ion-icon name="ios-trash-outline"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="!addresses?.length">
+    <h2 text-center>{{address_empty_txt}}</h2>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-row text-center>
+    <ion-col col-12>
+      <button ion-button full (click)="AddAddress()">{{add_new_address_txt}}</button>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>

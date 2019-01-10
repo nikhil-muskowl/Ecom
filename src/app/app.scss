@@ -1,0 +1,286 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+ion-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 70px 1px;
+    width: 100%;
+    height: 100%;
+}
+
+.clear-fix {
+    margin-top: 8rem;
+}
+
+p {
+    font-size: 15px;
+}
+
+.heading {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.heading:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin: 10px auto;
+    width: 20%;
+    height: 2px;
+    background: #000;
+}
+
+.content-clear-fix {
+    margin-top: 70px;
+}
+
+.img-responsive {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.icon-circle-outline {
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    padding: 5px;
+}
+
+$FONT_COLOR: #FAFAFA;
+.toolbar {
+    padding: 10px;
+    height: 70px;
+}
+
+.toolbar-background,
+.toolbar-background-md,
+.toolbar-background-ios,
+.tabs-md .tabbar,
+.tabs-ios .tabbar {
+    // background: -webkit-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: -o-linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: -moz-linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    background-repeat: repeat-x;
+    background: #cc1818;
+}
+
+.toolbar-title,
+.tabs-md .tab-button,
+.tabs-ios .tab-button,
+.tab-button-text {
+    color: $FONT_COLOR;
+}
+
+.bar-button,
+.tabs-md .bar-button:hover {
+    color: $FONT_COLOR;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-md .tab-button-icon,
+.tabs-ios .tab-button-icon {
+    color: $FONT_COLOR;
+}
+
+.button-md-primary {
+    color: #fff; // background: -webkit-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: -o-linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: -moz-linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    // background: linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
+    background-repeat: repeat-x;
+}
+
+.layer {
+    background-color: #cc1818;
+    background-blend-mode: screen;
+    opacity: 0.7;
+    filter: alpha(opacity=50);
+}
+
+.swiper-pagination-bullet-active {
+    background: color($colors, danger);
+    opacity: 1;
+}
+
+$card-ios-background-color: transparent;
+$card-md-background-color:transparent;
+$card-wp-background-color: transparent;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: lighter !important;
+}
+
+.menu-content {
+    // background: -webkit-gradient(to bottom, $SIDEMENU_BOTTOM, $SIDEMENU_TOP);
+    // background: -o-linear-gradient(to bottom, $SIDEMENU_BOTTOM, $SIDEMENU_TOP);
+    // background: -moz-linear-gradient(to bottom, $SIDEMENU_BOTTOM, $SIDEMENU_TOP);
+    // background: linear-gradient(to bottom, $SIDEMENU_BOTTOM, $SIDEMENU_TOP);
+    background-repeat: repeat-x;
+    color: #fff;
+    .list {
+        .item {
+            background: transparent;
+            h1 {
+                color: #fff;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.follow-us {
+    border-top: 1px solid #fff;
+    text-align: center;
+    font-size: 10px;
+    h1 {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+    ion-icon {
+        display: inline-block;
+        font-size: 3em;
+        margin: 5px;
+    }
+}
+
+ion-searchbar {
+    .searchbar-input-container {
+        .searchbar-input {
+            font-size: 1.5rem;
+            border-radius: 10px;
+            padding: 3px 55px;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+    }
+}
+
+.follow-us-btn {
+    text-transform: none;
+    padding: 3px 5px;
+    border-radius: 10px;
+    background-position: left 8px center;
+    height: auto;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 3rem;
+    color: #919191;
+    background-color: #fff;
+}
+
+.invalid {
+    border: 1px solid #cc1818;
+}
+
+.invalid-message {
+    color: #cc1818;
+    margin-left: 15px;
+}
+
+.tabbar {
+    transition: bottom 3s;
+}
+
+.discount-off {
+    background: #eed13b;
+    color: #333;
+    padding: 5px;
+}
+
+.product {
+    .card-title-md {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        color: #222;
+        margin: 2px 0;
+        padding: 8px 0;
+    }
+}
+
+.cart-info {
+    button {
+        ion-badge {
+            color: #fff;
+            position: absolute;
+            top: -0.2rem;
+            right: -0.2rem;
+            opacity: 0.9;
+            border: 1px solid;
+            border-radius: 50%;
+            &~ion-icon {
+                margin-right: 1.2rem;
+            }
+        }
+    }
+}
+
+.ellipsis-1 {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; // display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.ellipsis-2 {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.ellipsis-3 {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.alert-md {
+    .alert-title {
+        font-size: 22px;
+        color: #cc1818;
+        font-weight: 500 !important;
+    }
+
+    .alert-message {
+        max-height: 240px;
+        font-size: 15px;
+        color: #000;
+    }
+}

@@ -1,0 +1,159 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm">
+    <div text-center>
+      <p ion-text color="danger" *ngIf="submitAttempt && error_warning">{{error_warning}}</p>
+      <p ion-text color="secondary" *ngIf="submitAttempt && text_message">{{text_message}}</p>
+    </div>
+    <ion-grid style="padding:0px !important;">
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="person" item-start class="text-primary"></ion-icon>
+              {{firstname_txt}}
+            </ion-label>
+            <ion-input formControlName="firstname" type="text" [class.invalid]="!registerForm.controls.firstname.valid && (registerForm.controls.firstname.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.firstname.valid  && (registerForm.controls.firstname.dirty || submitAttempt)">{{error_firstname}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="person" item-start class="text-primary"></ion-icon>
+              {{lastname_txt}}
+            </ion-label>
+            <ion-input formControlName="lastname" type="text" [class.invalid]="!registerForm.controls.lastname.valid && (registerForm.controls.lastname.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.lastname.valid  && (registerForm.controls.lastname.dirty || submitAttempt)">{{error_lastname}}</p>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="contact" item-start class="text-primary"></ion-icon>
+              {{username_txt}}
+            </ion-label>
+            <ion-input formControlName="username" type="text" [class.invalid]="!registerForm.controls.username.valid && (registerForm.controls.username.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.username.valid  && (registerForm.controls.username.dirty || submitAttempt)">{{error_username}}</p>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+              {{email_txt}}
+            </ion-label>
+            <ion-input formControlName="email" type="text" [class.invalid]="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="call" item-start class="text-primary"></ion-icon>
+              {{phone_txt}}
+            </ion-label>
+            <ion-input formControlName="telephone" type="text" [class.invalid]="!registerForm.controls.telephone.valid && (registerForm.controls.telephone.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.telephone.valid  && (registerForm.controls.telephone.dirty || submitAttempt)">{{error_telephone}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+              {{password_txt}}
+            </ion-label>
+            <ion-input formControlName="password" type="password" [class.invalid]="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="unlock" item-start class="text-primary"></ion-icon>
+              {{conf_password_txt}}
+            </ion-label>
+            <ion-input formControlName="confirm" type="password" [class.invalid]="!registerForm.controls.confirm.valid && (registerForm.controls.confirm.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.confirm.valid  && (registerForm.controls.confirm.dirty || submitAttempt)">{{error_confirm}}</p>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="calendar" item-start class="text-primary"></ion-icon>
+              {{dob_txt}}
+            </ion-label>
+            <ion-input placeholder="" [value]="dob | date:'dd-MMM-yyyy'" (click)="open()"></ion-input>
+          </ion-item>
+          <ion-item no-lines hidden="true">
+            <ion-datetime #datePicker formControlName="dob" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY"
+              (ionCancel)="this.dob  = null" [(ngModel)]="dob" doneText="Select" cancelText="Cancel" [max]="maxDate">
+            </ion-datetime>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.dob.valid  && (registerForm.controls.dob.dirty || submitAttempt)">{{error_dob}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="contacts" item-start class="text-primary"></ion-icon>
+              {{gender_txt}}
+            </ion-label>
+            <ion-select [(ngModel)]="gender" formControlName="gender" [class.invalid]="!registerForm.controls.gender.valid && (registerForm.controls.gender.dirty || submitAttempt)">
+              <ion-option value="Male">{{male_txt}}</ion-option>
+              <ion-option value="Female">{{female_txt}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!registerForm.controls.gender.valid  && (registerForm.controls.gender.dirty || submitAttempt)">{{error_gender}}</p>
+        </ion-col>
+      </ion-row> -->
+
+
+    </ion-grid>
+  </form>
+
+  <div padding>
+    <button ion-button color="primary" block (click)="save()">{{register_txt}}</button>
+  </div>
+
+  <div class="terms" text-center>
+    <span ion-text>{{signin_agree}}</span>
+    <span ion-text tappable (click)="goToTermCondition()"><strong><u>{{terms}}</u></strong></span>
+    <span ion-text>{{and}} </span>
+    <span ion-text tappable (click)="goToPrivacyPolicy()"><strong><u>{{privacy_policy}}</u></strong></span>
+  </div>
+
+  <div class="login-div" padding text-center>
+    <span id="acc" ion-text>{{already_account}}</span>
+    <span id="log" ion-text tappable (click)="goToLogin()"><strong><u>{{log_in}}</u></strong></span>
+  </div>
+</ion-content>

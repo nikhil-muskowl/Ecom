@@ -1,0 +1,27 @@
+product-review {
+    .item-md {
+        padding-left: 0px !important;
+    }
+
+    .card-header-md {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 0px;
+        padding-bottom: 10px;
+    }
+
+    .item-md.item-block .item-inner{
+        padding-right: 0px;
+    }
+
+    .item-md [item-end] {
+        margin: 0px 0px 0px 0;
+    }
+
+    //  Changed this on 24/09/2018 because of new design changes 
+
+    .write-review {
+        margin-top: 40px;
+        margin-bottom: -15px;
+    }
+}

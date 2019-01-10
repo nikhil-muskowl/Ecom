@@ -1,0 +1,167 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-content>
+
+    <form [formGroup]="accountForm">
+
+      <div text-center>
+        <p ion-text color="danger" *ngIf="submitAttempt && error">{{error}}</p>
+        <p ion-text color="secondary" *ngIf="submitAttempt && success">{{success}}</p>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{firstname_txt}}</ion-label>
+              <ion-input formControlName="firstname" [(ngModel)]="firstname" type="text" [class.invalid]="!accountForm.controls.firstname.valid && (accountForm.controls.firstname.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.firstname.valid  && (accountForm.controls.firstname.dirty || submitAttempt)">{{error_firstname}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{lastname_txt}}</ion-label>
+              <ion-input formControlName="lastname" [(ngModel)]="lastname" type="text" [class.invalid]="!accountForm.controls.lastname.valid && (accountForm.controls.lastname.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.lastname.valid  && (accountForm.controls.lastname.dirty || submitAttempt)">{{error_lastname}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{email_txt}}</ion-label>
+              <ion-input formControlName="email" [(ngModel)]="email" type="text" [class.invalid]="!accountForm.controls.email.valid && (accountForm.controls.email.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.email.valid  && (accountForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{phone_txt}}</ion-label>
+              <ion-input formControlName="telephone" [(ngModel)]="telephone" type="text" [class.invalid]="!accountForm.controls.telephone.valid && (accountForm.controls.telephone.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.telephone.valid  && (accountForm.controls.telephone.dirty || submitAttempt)">{{error_telephone}}</p>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{dob_txt}}</ion-label>
+              <ion-input placeholder="" [value]="dob | date:'dd-MMM-yyyy'" (click)="open()"></ion-input>
+            </ion-item>
+            <ion-item no-lines hidden="true">
+              <ion-datetime #datePicker formControlName="dob" displayFormat="DD-MM-YYYY" pickerFormat="DD MMMM YYYY"
+                (ionCancel)="this.dob  = null" [(ngModel)]="dob" doneText="Select" cancelText="Cancel" [max]="maxDate">
+              </ion-datetime>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.dob.valid  && (accountForm.controls.dob.dirty || submitAttempt)">{{error_dob}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{gender_txt}}</ion-label>
+              <ion-select [(ngModel)]="gender" formControlName="gender" [class.invalid]="!accountForm.controls.gender.valid && (accountForm.controls.gender.dirty || submitAttempt)">
+                <ion-option value="Male">{{male_txt}}</ion-option>
+                <ion-option value="Female">{{female_txt}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.gender.valid  && (accountForm.controls.gender.dirty || submitAttempt)">{{error_gender}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{country_txt}}</ion-label>
+              <ion-select [(ngModel)]="country_id" (ionChange)="getZone(country_id)" formControlName="country_id"
+                interface="popover" [class.invalid]="!accountForm.controls.country_id.valid && (accountForm.controls.country_id.dirty || submitAttempt)">
+                <ion-option *ngFor="let country of countries" value="{{country.country_id}}">{{country.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.country_id.valid  && (accountForm.controls.country_id.dirty || submitAttempt)">{{error_country_id}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{zone_txt}}</ion-label>
+              <ion-select [(ngModel)]="zone_id" (ionChange)="getDistrict(zone_id)" formControlName="zone_id" interface="popover"
+                [class.invalid]="!accountForm.controls.zone_id.valid && (accountForm.controls.zone_id.dirty || submitAttempt)">
+                <ion-option *ngFor="let zone of zones" value="{{zone.zone_id}}">{{zone.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.zone_id.valid  && (accountForm.controls.zone_id.dirty || submitAttempt)">{{error_zone_id}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>{{district_txt}}</ion-label>
+              <ion-select [(ngModel)]="district_id" formControlName="district_id" interface="popover" [class.invalid]="!accountForm.controls.district_id.valid && (accountForm.controls.district_id.dirty || submitAttempt)">
+                <ion-option *ngFor="let district of districts" value="{{district.district_id}}">{{district.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.district_id.valid  && (accountForm.controls.district_id.dirty || submitAttempt)">{{error_district_id}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{postcode_txt}}</ion-label>
+              <ion-input [(ngModel)]="postcode" formControlName="postcode" type="text" [class.invalid]="!accountForm.controls.postcode.valid && (accountForm.controls.postcode.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.postcode.valid  && (accountForm.controls.postcode.dirty || submitAttempt)">{{error_postcode}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{city_txt}}</ion-label>
+              <ion-input [(ngModel)]="city" formControlName="city" type="text" [class.invalid]="!accountForm.controls.city.valid && (accountForm.controls.city.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.city.valid  && (accountForm.controls.city.dirty || submitAttempt)">{{error_city}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>{{address_txt}}</ion-label>
+              <ion-input [(ngModel)]="address" formControlName="address" type="text" [class.invalid]="!accountForm.controls.address.valid && (accountForm.controls.address.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+            <p class="invalid-message" *ngIf="!accountForm.controls.address.valid  && (accountForm.controls.address.dirty || submitAttempt)">{{error_address}}</p>
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+    </form>
+
+    <div padding>
+      <button ion-button color="primary" block (click)="save()">{{update_txt}}</button>
+    </div>
+  </ion-content>

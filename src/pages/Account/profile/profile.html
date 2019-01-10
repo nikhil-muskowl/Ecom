@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+
+    <button start ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+  <div text-center>
+    <h1>{{customerFname}} {{customerLname}}</h1>
+    <p>{{telephone}}</p>
+    <p>{{email}}</p>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      {{acc_setting_txt}}
+    </ion-list-header>
+    <ion-item (click)="gotoWishlist()">{{wishlist_txt}}</ion-item>
+    <ion-item (click)="gotoOrders()">{{my_orders_txt}}</ion-item>
+    <ion-item (click)="gotoAddress()">{{address_book_txt}}</ion-item>
+    <ion-item (click)="gotoEditAccount()">{{edit_acc_txt}}</ion-item>
+    <ion-item (click)="gotoChangePassword()">{{chang_pass_txt}}</ion-item>
+    <ion-item (click)="logout()">
+      <ion-icon name="log-out"></ion-icon> &nbsp; {{logout_txt}}
+    </ion-item>
+
+
+  </ion-list>
+</ion-content>

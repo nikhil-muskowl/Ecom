@@ -1,0 +1,24 @@
+page-cart {
+    .card-md h3{
+        color: #cc1818;
+        font-weight: 500 !important;
+    }
+    hr {
+        margin-top: 20px !important;
+        height: 1px;
+        border-width: 0;
+        background-color: #000000 !important;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+    .item-md h6 {
+        margin: 2px 0;
+        font-size: 1.4rem;
+        font-weight: 500 !important;
+        line-height: normal;
+    }
+    .item-md p {
+        font-weight: 500 !important;
+        color: #000000 !important;
+    }
+}

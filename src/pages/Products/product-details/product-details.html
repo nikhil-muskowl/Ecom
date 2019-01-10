@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{heading_title}}
+    </ion-title>
+
+    <ion-buttons end>
+      <!-- <button ion-button icon-only (click)="goToSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button> -->
+      <span class="cart-info">
+        <button ion-button icon-only (click)="goTocart()">
+          <ion-badge item-end *ngIf="totalQty != 0">{{totalQty}}</ion-badge>
+          <ion-icon name="cart"></ion-icon>
+        </button>
+      </span>
+      <!-- Commented this on 21/09/2018 because of new changes -->
+      <!-- <button ion-button icon-only (click)="presentActionSheet($event)">
+              <ion-icon name="share"></ion-icon>
+          </button> -->
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="product-view">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <div text-center id="text-center">
+          <div class="off-img-vg-img">
+            <ion-row no-padding>
+              <ion-col class="col-md-6">
+              </ion-col>
+              <ion-col class="col-md-6">
+                <img class="vegimg" src="{{vegsignimage}}">
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="product-image">
+            <ion-row no-padding>
+              <ion-col class="col-md-12">
+                <img src="{{popup}}" id="pro-img">
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div class="image-slider">
+            <ion-slides>
+              <ion-slide class="image-slider-slide" *ngFor="let image of images;">
+                <img src="{{image.popup}}">
+              </ion-slide>
+            </ion-slides>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <div text-left class="product-description">
+          <ion-row id="pro-title-row" no-padding>
+            <ion-col id="pro-title-col" class="col-md-12">
+              <h1 [innerHTML]="heading_title"></h1>
+            </ion-col>
+          </ion-row>
+          <ion-row no-padding class="pro-ratings">
+            <rating [(ngModel)]="rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+              starIconName="star" nullable="false"></rating>
+          </ion-row>
+          <ion-row no-padding id="pro-price">
+            <ion-col>
+              <div *ngIf="price !=false; then showspecialprice else showprice"></div>
+
+              <ng-template #showprice>
+                <p style="margin-top: 0px; margin-bottom: 4px;">{{mrp}}</p>
+              </ng-template>
+
+              <ng-template #showspecialprice>
+                <p style="margin-top: 0px; margin-bottom: 4px;">{{price}} &nbsp;&nbsp; <del>{{mrp}}</del></p>
+              </ng-template>
+            </ion-col>
+            <!-- <ion-col text-center>
+                          <span *ngIf="discountrate" class="discount-off">{{discountrate}} % Off</span>
+                      </ion-col> -->
+          </ion-row>
+          <ion-row no-padding id="pro-offer-img">
+            <ion-col>
+              <img id="offerimg" *ngIf="offerimage !='';" src="{{offerimage}}">
+            </ion-col>
+          </ion-row>
+          <ion-row no-padding id="pro-availability">
+            <ion-col>
+              <p style="margin-top: 0px;">{{available}}: <span class="availability" style="color:green;" *ngIf="stock == 'In Stock'">{{stock}}</span>
+                <span class="availability" style="color:red;" *ngIf="stock == 'Out of Stock'">{{stock}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+          <!-- <rating [(ngModel)]="rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+                      nullable="false"></rating> -->
+
+          <ion-row>
+            <ion-col col-12>
+              <hr>
+              <form [formGroup]="cartForm">
+                <ion-grid>
+                  <!-- <ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>{{option}}</ion-label>
+                        <ion-select [(ngModel)]="detail_id" formControlName="detail_id" interface="popover"
+                          [class.invalid]="!cartForm.controls.detail_id.valid && (cartForm.controls.detail_id.dirty || submitAttempt)">
+                          <ion-option *ngFor="let productdetail of productdetaillist" value="{{productdetail.product_detail_id}}">{{productdetail.netweight}},
+                            {{productdetail.price}}
+                          </ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <p class="invalid-message" *ngIf="!cartForm.controls.detail_id.valid  && (cartForm.controls.detail_id.dirty || submitAttempt)">{{field_error}}</p>
+                    </ion-col>
+                  </ion-row>-->
+                  <ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label floating>{{quantity}}</ion-label>
+                        <ion-input [(ngModel)]="cart_quantity" formControlName="quantity" type="text" [class.invalid]="!cartForm.controls.quantity.valid && (cartForm.controls.quantity.dirty || submitAttempt)"></ion-input>
+                      </ion-item>
+                      <p class="invalid-message" *ngIf="!cartForm.controls.quantity.valid  && (cartForm.controls.quantity.dirty || submitAttempt)">{{qty_error}}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </form>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button style="width:97%; margin-left:5px;" ion-button full (click)="save()">
+                <ion-icon name="cart"></ion-icon>&nbsp; {{add_to_cart}}
+              </button>
+              <!-- <button ion-button full color="light" (click)="addWishlist()">Add to wishlist</button> -->
+            </ion-col>
+            <ion-col>
+              <!-- <button ion-button full (click)="save()">Add to cart</button> -->
+              <button style="width:97%; margin-left:0px;" ion-button full color="light" (click)="addWishlist()">
+                <ion-icon name="checkbox-outline"></ion-icon>&nbsp; {{add_to_wishlist}}
+              </button>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12>
+              <div padding>
+                <ion-segment [(ngModel)]="review_tab">
+                  <ion-segment-button value="description" style="margin-left: -10px;">
+                    {{description_txt}}
+                  </ion-segment-button>
+                  <ion-segment-button value="reviews" style="margin-right: -10px;">
+                    {{reviews_txt}}
+                  </ion-segment-button>
+                </ion-segment>
+              </div>
+              <div [ngSwitch]="review_tab">
+                <div *ngSwitchCase="'description'">
+                  <p style="margin-left:18px;" [innerHTML]="description"></p>
+                </div>
+                <div *ngSwitchCase="'reviews'">
+                  <product-review [productid]="product_id"></product-review>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

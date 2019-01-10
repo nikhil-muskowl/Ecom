@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list radio-group *ngIf="payment_methods?.length>0">
+    <ion-item *ngFor="let payment of payment_methods; let i = index;">
+      <ion-label [innerHTML]="payment.title"></ion-label>
+      <ion-radio [value]="payment" (ionSelect)="paymentChange($event)"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="payment_methods?.length>0">
+  <ion-row text-center>
+    <ion-col col-12>
+      <button ion-button full color="primary" block (click)="save()">{{continue_txt}}</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

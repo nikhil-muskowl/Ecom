@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>
+        {{heading_title}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <ion-list radio-group *ngIf="shipping_methods?.length>0">
+      <ion-item *ngFor="let delivery of shipping_methods; let i = index;">
+        <ion-label [innerHTML]="delivery.title"></ion-label>
+        <ion-radio [value]="delivery" (ionSelect)="deliveryChange($event)"></ion-radio>
+      </ion-item>
+    </ion-list>
+  
+  </ion-content>
+  
+  <ion-footer *ngIf="shipping_methods?.length>0">
+    <ion-row text-center>
+      <ion-col col-12>
+        <button ion-button full color="primary" block (click)="save()">{{continue_txt}}</button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

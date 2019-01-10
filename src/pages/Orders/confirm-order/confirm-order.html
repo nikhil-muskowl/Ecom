@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="products?.length">
+
+    <ion-card *ngFor="let product of products;">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12>
+              <h3 [innerHTML]="product.name"></h3>
+              <p>{{product.model}}</p>
+              <p>
+                {{product.quantity}} * {{product.price}} = {{product.total}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <hr>
+    <ion-list>
+      <ion-item *ngFor="let total of totals;">
+        <div item-start>
+          <h6>{{total.title}}</h6>
+        </div>
+        <div item-end>
+          <p>{{total.text}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block [disabled]="!hasProducts" color='primery' (click)="goToCheckout()">{{confirm_order_txt}}</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,74 @@
+<div>
+
+  <div *ngIf="reviews?.length !=0; then isReview else noReview"></div>
+
+  <ng-template #isReview>
+    <ion-card *ngFor="let review of reviews">
+      <ion-card-header>
+        <ion-item>
+          <div item-start>
+            <h2>{{review.author}}</h2>
+          </div>
+          <div item-end>
+            <p>{{review.date_added}}</p>
+          </div>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{review.text}}</p>
+        <rating [(ngModel)]="review.rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+          starIconName="star" nullable="false"></rating>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <ng-template #noReview>
+    <p>{{no_reviews}}</p>
+  </ng-template>
+
+
+  <h2 class="write-review" text-center>{{write_review}}</h2>
+
+  <form [formGroup]="reviewForm">
+
+    <div text-center>
+      <p ion-text color="secondary" *ngIf="submitAttempt && success">{{success}}</p>
+      <p ion-text color="danger" *ngIf="submitAttempt && error">{{error}}</p>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>{{name_txt}}</ion-label>
+            <ion-input formControlName="name" type="text" [class.invalid]="!reviewForm.controls.name.valid && (reviewForm.controls.name.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!reviewForm.controls.name.valid  && (reviewForm.controls.name.dirty || submitAttempt)">{{error_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>{{write_review_here}}</ion-label>
+            <ion-input formControlName="text" type="text" [class.invalid]="!reviewForm.controls.text.valid && (reviewForm.controls.text.dirty || submitAttempt)"></ion-input>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!reviewForm.controls.text.valid  && (reviewForm.controls.text.dirty || submitAttempt)">{{error_review}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <rating [(ngModel)]="rateValue" formControlName="rating" (ngModelChange)="onRateChange(rateValue)" readOnly="false"
+              max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+          </ion-item>
+          <p class="invalid-message" *ngIf="!reviewForm.controls.rating.valid  && (reviewForm.controls.rating.dirty || submitAttempt)">{{error_rate}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+  <div padding>
+    <button ion-button color="primary" block (click)="save()">{{post}}</button>
+  </div>
+</div>

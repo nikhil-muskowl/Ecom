@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div class="login-content">
+    <form class="list-form" [formGroup]="loginForm">
+
+      <div text-center>
+        <p ion-text color="danger" *ngIf="submitAttempt && error_warning">{{error_warning}}</p>
+        <p ion-text color="secondary" *ngIf="submitAttempt && success">{{success}}</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          {{email_txt}}
+        </ion-label>
+        <ion-input formControlName="email" type="text" [class.invalid]="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)"></ion-input>
+      </ion-item>
+      <p class="invalid-message" *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || submitAttempt)">{{error_email}}</p>
+
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          {{password_txt}}
+        </ion-label>
+        <ion-input formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)"></ion-input>
+      </ion-item>
+      <p class="invalid-message" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">{{error_password}}</p>
+    </form>
+    <div>
+      <button ion-button icon-start block color="primary" tappable (click)="save()">
+        <ion-icon name="log-in"></ion-icon>
+        {{sign_in_txt}}
+      </button>
+    </div>
+    <div text-center margin-top>
+      <span class="new-here" ion-text>{{new_here_txt}} </span><span class="new-here" ion-text tappable (click)="goToRegsiter()"><strong>{{sign_up_txt}}</strong></span>
+    </div>
+  </div>
+</ion-content>

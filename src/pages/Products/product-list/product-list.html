@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      {{heading_title}}
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="getSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-buttons text-center>
+    <button ion-button (click)="presentSortActionSheet($event)">
+      {{sort_txt}}&nbsp;
+      <ion-icon name="md-funnel"></ion-icon>
+    </button>
+    <button ion-button (click)="openFilter()">
+      {{filter_txt}}&nbsp;
+      <ion-icon name="ios-funnel-outline"></ion-icon>
+    </button>
+  </ion-buttons>
+
+  <ion-searchbar *ngIf="isSearch" placeholder="{{search_place}}" [(ngModel)]="searchInput" [showCancelButton]="shouldShowCancel"
+    (search)="onSearch($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
+
+  <div padding>
+    <p [innerHTML]="description"></p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col id="productdec" col-6 *ngFor="let product of productModel;">
+        <ion-card class="product" (click)="getProductDetail(product)">
+
+          <div class="off-img-vg-img">
+            <ion-row no-padding>
+              <ion-col class="col-md-6">
+                <img class="offerimg" src="{{product.offerimage}}">
+              </ion-col>
+              <ion-col class="col-md-6">
+                <img class="vegimg" src="{{product.vegsignimage}}">
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div id="pro-img" text-center>
+            <ion-row>
+              <ion-col class="col-md-12">
+                <img src="{{product.thumb}}">
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <ion-card-content>
+
+            <ion-card-title>
+              {{product.name}}
+            </ion-card-title>
+
+            <ion-row no-padding>
+              <ion-col class="product-price">
+                <div *ngIf="product.special !=false; then specialprice else price"></div>
+
+                <ng-template #price>
+                  <p>{{product.price}}</p>
+                </ng-template>
+
+                <ng-template #specialprice>
+                  <del>{{product.price}}</del>
+                  <p>{{product.special}}</p>
+                </ng-template>
+              </ion-col>
+              <!-- <ion-col text-center>
+                            <span *ngIf="product.discountrate" class="discount-off">{{product.discountrate}} % Off</span>
+                        </ion-col> -->
+            </ion-row>
+
+            <!-- <ion-row no-padding>
+                        <ion-col>
+                            <img id="offerimg" src="{{product.offerimage}}">
+                        </ion-col>
+                    </ion-row> -->
+            <ion-row no-padding class="pro-ratings">
+              <div *ngIf="onRateChange(product.rating)"></div>
+              <rating [(ngModel)]="rateValue" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                starIconName="star" nullable="false"></rating>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="isInfinite">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{load_more}}">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

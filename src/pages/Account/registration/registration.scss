@@ -1,0 +1,23 @@
+page-registration {
+    .grid .label-md {
+        font-size: 14px !important;
+    }
+
+    ion-content .terms span {
+        font-size: 10px;
+        color: #cc1818;
+    }
+    ion-label{
+        color: #cc1818 !important;
+    }
+    ion-content .login-div{
+        #acc {
+            font-size: 13px;
+            color: #cc1818;
+        }
+        #log {
+            font-size: 14px;
+            color: #cc1818;
+        }
+    }
+}

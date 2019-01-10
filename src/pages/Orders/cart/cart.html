@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{heading_title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="products?.length">
+
+    <ion-card *ngFor="let product of products;">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-8>
+              <h3 [innerHTML]="product.name"></h3>
+              <p>{{product.model}}</p>
+              <p>
+                {{product.total}} = {{product.quantity}}*{{product.price}}
+              </p>
+            </ion-col>
+            <ion-col col-4>
+              <ion-buttons end>
+                <button ion-button color="secondary" icon-only (click)="edit(product)">
+                  <ion-icon name="ios-create-outline"></ion-icon>
+                </button>
+                <button ion-button color="danger" icon-only (click)="remove(product)">
+                  <ion-icon name="ios-trash-outline"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <hr>
+    <ion-list>
+      <ion-item *ngFor="let total of totals;">
+        <div item-start>
+          <h6>{{total.title}}</h6>
+        </div>
+        <div item-end>
+          <p>{{total.text}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block [disabled]="!hasProducts" color='primery' (click)="goToCheckout()">{{place_order_txt}}</button>
+    </div>
+  </div>
+
+  <div *ngIf="!products?.length" text-center>
+    <h2>{{empty_cart}}</h2>
+    <button ion-button (click)="goToHome()">{{shop_now}}</button>
+  </div>
+</ion-content>
