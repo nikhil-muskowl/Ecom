@@ -88,7 +88,10 @@ $FONT_COLOR: #FAFAFA;
     // background: -moz-linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
     // background: linear-gradient(to right, $SIDEMENU_TOP, $SIDEMENU_BOTTOM);
     background-repeat: repeat-x;
-    background: #cc1818;
+    background: #FFDF00;
+    background: #D4AF37;
+    background: #CFB53B;
+    background: #C5B358;
 }
 
 .toolbar-title,
@@ -119,7 +122,7 @@ $FONT_COLOR: #FAFAFA;
 }
 
 .layer {
-    background-color: #cc1818;
+    background-color: #CFB53B;
     background-blend-mode: screen;
     opacity: 0.7;
     filter: alpha(opacity=50);

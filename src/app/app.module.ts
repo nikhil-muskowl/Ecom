@@ -73,6 +73,8 @@ import { PaymentsProvider } from '../providers/payments/payments';
 
 //Paypal
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+import { HomeProvider } from '../providers/home/home';
+import { InformationsProvider } from '../providers/informations/informations';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/language/', '.json');
@@ -185,6 +187,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddressProvider,
     PaymentsProvider,
     PayPal,
+    HomeProvider,
+    InformationsProvider,
   ]
 })
 export class AppModule { }

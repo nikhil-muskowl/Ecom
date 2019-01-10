@@ -185,5 +185,6 @@
   "use_new_address": "I want to use a new Address",
   "payment_method": "Payment Method",
   "delivery_method": "Delivery Method",
-  "confirm_order": "Confirm Order"
+  "confirm_order": "Confirm Order",
+  "ecom": "E-com"
 }

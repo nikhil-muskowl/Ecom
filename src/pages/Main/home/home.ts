@@ -5,31 +5,44 @@ import { LoadingProvider } from '../../../providers/loading/loading';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from '../../../providers/language/language';
 import { LoginProvider } from '../../../providers/login/login';
-import { ProfilePage } from '../../Account/profile/profile';
-import { LoginPage } from '../../Account/login/login';
 import { AlertController, Alert } from 'ionic-angular';
-import { CategoriesPage } from '../../Products/categories/categories';
-import { CartPage } from '../../Orders/cart/cart';
-import { ProductListPage } from '../../Products/product-list/product-list';
-import { SpecialOffersPage } from '../../Products/special-offers/special-offers';
 import { SettingsProvider } from '../../../providers/settings/settings';
-import { CartProvider } from '../../../providers/cart/cart';
+import { HomeProvider } from '../../../providers/home/home';
+import { Slides } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(Slides) banSlides: Slides;
+  @ViewChild(Slides) featuredSlides: Slides;
+  @ViewChild(Slides) leatestSlides: Slides;
+  @ViewChild(Slides) sellerSlides: Slides;
 
   heading_title;
   public language_id;
   public currency_id;
-  public totalQty = 0;
+  //Banners
+  responseBanenerData;
+  BannerData: any = [];
+
+  //Featured
+  responseFeaturedData;
+  FeaturedData: any = [];
+
+  //Leatest
+  responseLeatestData;
+  LeatestData: any = [];
+
+  //Best Seller
+  responseSellerData;
+  SellerData: any = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
-    public cartProvider: CartProvider,
+    public homeProvider: HomeProvider,
     public settingsProvider: SettingsProvider,
     public alertProvider: AlertProvider,
     public loadingProvider: LoadingProvider,
@@ -42,7 +55,10 @@ export class HomePage {
     this.currency_id = this.settingsProvider.getCurrData();
 
     this.setText();
-    this.getProducts();
+    this.getBanners();
+    this.getFeatured();
+    this.getLeatest();
+    this.getBestseller();
 
   }
 
@@ -50,57 +66,118 @@ export class HomePage {
     this.translate.setDefaultLang(this.languageProvider.getLanguage());
     this.translate.use(this.languageProvider.getLanguage());
 
-    this.translate.get('my_orders').subscribe((text: string) => {
+    this.translate.get('ecom').subscribe((text: string) => {
       this.heading_title = text;
     });
   }
 
-  gotoCart() {
-    this.navCtrl.push(CartPage, { from: 'home' });
-  }
-
-  gotoHome() {
-    this.navCtrl.setRoot(HomePage);
-  }
-
-  gotoCategory() {
-    this.navCtrl.setRoot(CategoriesPage);
-  }
-
-  gotoProfile() {
-    this.navCtrl.setRoot(ProfilePage);
-  }
-
-  gotoNotifications() {
-    this.navCtrl.setRoot(CategoriesPage);
-  }
-
-  gotoSearch() {
-    this.navCtrl.push(ProductListPage, { from: 'home' });
-  }
-
-  gotoOffers() {
-    this.navCtrl.push(SpecialOffersPage);
-  }
-
-  public getProducts() {
+  public getBanners() {
     let param = {
       language_id: this.language_id,
-      currency_id: this.currency_id
+      currency_id: this.currency_id,
+      banner_id: '7',
     };
-    this.cartProvider.products(param).subscribe(
+    this.homeProvider.apiBannerDetails(param).subscribe(
       response => {
-        if (response) {
-          if (response.total_quantity) {
-            this.totalQty = response.total_quantity;
-          }
+        this.responseBanenerData = response;
+
+        if (this.responseBanenerData.status) {
+          this.BannerData = this.responseBanenerData.banners;
         }
       },
       err => console.error(err),
       () => {
       }
     );
-    return event;
+  }
 
+  slideBannerChanged() {
+    let currentIndex = this.banSlides.getActiveIndex();
+    if (currentIndex == this.BannerData.length) {
+      this.banSlides.stopAutoplay();
+
+    }
+  }
+
+  public getFeatured() {
+    let param = {
+      language_id: this.language_id,
+      currency_id: this.currency_id,
+      banner_id: '7',
+    };
+    this.homeProvider.apiFeatured(param).subscribe(
+      response => {
+        this.responseFeaturedData = response;
+
+        if (this.responseFeaturedData.status) {
+          this.FeaturedData = this.responseFeaturedData.products;
+        }
+      },
+      err => console.error(err),
+      () => {
+      }
+    );
+  }
+
+  slideFeaturedChanged() {
+    let currentIndex = this.featuredSlides.getActiveIndex();
+    if (currentIndex == this.FeaturedData.length) {
+      this.featuredSlides.stopAutoplay();
+
+    }
+  }
+
+  public getLeatest() {
+    let param = {
+      language_id: this.language_id,
+      currency_id: this.currency_id,
+    };
+
+    this.homeProvider.apiLatest(param).subscribe(
+      response => {
+        this.responseLeatestData = response;
+
+        if (this.responseLeatestData.status) {
+          this.LeatestData = this.responseLeatestData.products;
+        }
+      },
+      err => console.error(err),
+      () => {
+      }
+    );
+  }
+
+  slideLeatestChanged() {
+    let currentIndex = this.leatestSlides.getActiveIndex();
+    if (currentIndex == this.LeatestData.length) {
+      this.leatestSlides.stopAutoplay();
+    }
+  }
+
+  public getBestseller() {
+    let param = {
+      language_id: this.language_id,
+      currency_id: this.currency_id,
+    };
+
+    this.homeProvider.apiBestseller(param).subscribe(
+      response => {
+        this.responseSellerData = response;
+
+        if (this.responseSellerData.status) {
+          this.SellerData = this.responseSellerData.products;
+        }
+      },
+      err => console.error(err),
+      () => {
+      }
+    );
+  }
+
+  slideBestsellerChanged() {
+    let currentIndex = this.sellerSlides.getActiveIndex();
+    if (currentIndex == this.LeatestData.length) {
+      this.sellerSlides.stopAutoplay();
+    }
   }
 }
